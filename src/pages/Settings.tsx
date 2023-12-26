@@ -16,13 +16,18 @@ const Settings: React.FC = () => {
   useEffect(() => {
     const fetchRangeList = async () => {
       try {
-        const response = await axios.get<{ status: string; rangeList: Range[] }>(
+        console.log('axios is calling');
+
+        const response = await axios.get<any>(
           'http://localhost:5000/api/admin/enitity-rang-list',
         );
         if (response.data.status === 'success') {
           setRangeList(response.data.rangeList);
         } else {
-          console.error('API request failed with status:', response.data.status);
+          console.error(
+            'API request failed with status:',
+            response.data.status,
+          );
         }
       } catch (error) {
         console.error('Error fetching range list:', error);
@@ -65,6 +70,7 @@ const Settings: React.FC = () => {
           <div
             key={range._id}
             className="grid grid-cols-3 border-b border-stroke dark:border-strokedark "
+            style={{ backgroundColor: range.color }}
           >
             <div className="flex items-center justify-center p-2.5 xl:p-5">
               <p className="text-black dark:text-white">{range.startRange}</p>

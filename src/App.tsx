@@ -1,52 +1,65 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
-import ECommerce from './pages/Dashboard/ECommerce';
+// import ECommerce from './pages/Dashboard/ECommerce';
 import SignIn from './pages/Authentication/SignIn';
-// import SignUp from './pages/Authentication/SignUp';
 import Loader from './common/Loader';
-import routes from './routes';
+// import routes from './routes/admin';
+import AdminRoute from './routes/adminRoute';
+// import agentRoutes from './routes/agent';
+import AgentRoute from './routes/agentRoute';
 
-const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
+// const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
+  useEffect(() => {
+    const admin = localStorage.getItem('admin');
+    if (!admin) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
   return loading ? (
     <Loader />
   ) : (
     <>
-      <Toaster
-        position="top-right"
-        reverseOrder={false}
-        containerClassName="overflow-auto"
-      />
+      <Toaster />
       <Routes>
         <Route path="/login" element={<SignIn />} />
 
-        {/* <Route path="/signup" element={<SignUp />} /> */}
+        <Route path="/admin/*" element={<AdminRoute />} />
 
-        <Route element={<DefaultLayout />}>
+        <Route path="/*" element={<AgentRoute />} />
+
+
+
+
+
+
+
+
+        {/* <Route element={<DefaultLayout />}>
           <Route index element={<ECommerce />} />
-          {routes.map(({ path, component: Component }, index) => {
-            return (
-              <Route
-                key={index}
-                path={path}
-                element={
-                  <Suspense fallback={<Loader />}>
-                    <Component />
-                  </Suspense>
-                }
-              />
-            );
-          })}
-        </Route>
+          {routes.map(({ path, component: Component }, index) => (
+            <Route
+              key={index}
+              path={path}
+              element={
+                <Suspense fallback={<Loader />}>
+                  <Component />
+                </Suspense>
+              }
+            />
+          ))}
+        </Route> */}
       </Routes>
     </>
   );
