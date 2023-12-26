@@ -9,8 +9,8 @@ interface Person {
   count: string;
   tokenNumber: string;
   email: string;
-  contactNumber:string
-  date:string
+  contactNumber: string;
+  date: string;
 }
 
 const TableTwo: React.FC = () => {
@@ -31,6 +31,14 @@ const TableTwo: React.FC = () => {
     fetchUserDetails();
   }, []);
   console.log(people);
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -57,7 +65,7 @@ const TableTwo: React.FC = () => {
             Date
           </h5>
           <h5 className="hidden text-sm font-medium uppercase xsm:text-base text-center sm:block">
-          Phone
+            Phone
           </h5>
         </div>
 
@@ -85,7 +93,7 @@ const TableTwo: React.FC = () => {
               <p className="text-meta-5">{person.email}</p>
             </div>
             <div className="hidden items-center justify-center sm:flex">
-              <p className="text-meta-5">{person.date}</p>
+              <p className="text-meta-5">{formatDate(person.date)}</p>
             </div>
             <div className="hidden items-center justify-center sm:flex">
               <p className="text-meta-5">{person.contactNumber}</p>
