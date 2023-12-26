@@ -6,10 +6,11 @@ const DropdownUser = () => {
   const handleLogout = () => {
     if (localStorage.getItem('admin')) {
       localStorage.removeItem('admin');
-    } else if (localStorage.getItem('user')) {
-      localStorage.removeItem('user');
+      console.log("logout",localStorage.getItem('admin'));
+    } else if (localStorage.getItem('agent')) {
+      localStorage.removeItem('agent');
+      console.log("logout",localStorage.getItem('agent'));
     }
-
     navigate('/login');
   };
 

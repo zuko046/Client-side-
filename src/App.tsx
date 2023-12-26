@@ -9,8 +9,6 @@ import AgentRoute from './routes/agentRoute';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
-  const navigate = useNavigate();
-
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
   }, []);

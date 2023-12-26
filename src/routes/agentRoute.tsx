@@ -25,11 +25,10 @@ function AgentRoute() {
         <Routes>
           <Route element={<DefaultLayout />}>
             <Route index element={<Dashboard />} />
-{/* 
+            {/* 
             {agentRouteSet.map(({ path, component: Component }, index) => (
               <Route key={index} path={path} element={<Component />} />
             ))} */}
-
           </Route>
         </Routes>
       </Suspense>

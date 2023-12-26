@@ -6,6 +6,10 @@ import { loginUser } from '../../redux/reducer/userSlice';
 
 const SignIn = () => {
   const navigate = useNavigate();
+
+  const agent = localStorage.getItem('agent');
+  const admin = localStorage.getItem('admin');
+
   const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
     userName: '',
@@ -28,7 +32,6 @@ const SignIn = () => {
         'http://localhost:5000/api/auth/login',
         credentials,
       );
-
       const { token, user } = response.data;
       const userdata = {
         _id: user?._id,
@@ -38,7 +41,6 @@ const SignIn = () => {
         contactNumber: user?.contactNumber,
         userRole: user?.userRole,
       };
-
       console.log(token, user);
       dispatch(loginUser(userdata));
 
@@ -47,15 +49,13 @@ const SignIn = () => {
         localStorage.setItem('admin', token);
 
         navigate('/admin');
-
       } else if (user.userRole === 2) {
         localStorage.setItem('agent', token);
         // Redirect to the agent dashboard
-        console.log("working");
+        console.log('working');
 
         navigate('/');
-        console.log("working");
-        
+        console.log('working');
       } else {
         // Handle unknown role or show an error message
         console.error('Unknown user role:', user.userRole);
