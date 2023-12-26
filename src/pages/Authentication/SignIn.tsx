@@ -46,12 +46,13 @@ const SignIn = () => {
         // Redirect to the admin dashboard
         localStorage.setItem('admin', token);
 
-        navigate('/');
+        navigate('/admin');
+
       } else if (user.userRole === 2) {
-        localStorage.setItem('user', token);
+        localStorage.setItem('agent', token);
 
         // Redirect to the agent dashboard
-        navigate('/addtoken');
+        navigate('/');
       } else {
         // Handle unknown role or show an error message
         console.error('Unknown user role:', user.userRole);
