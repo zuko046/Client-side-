@@ -86,9 +86,6 @@ const TableTwo: React.FC = () => {
             <div className="hidden items-center justify-center sm:flex">
               <p className="text-black dark:text-white">{person.count}</p>
             </div>
-            {/* <div className="hidden items-center justify-center sm:flex">
-              <p className="text-meta-5">{person.colour}</p>
-            </div> */}
             <div className="hidden items-center justify-center sm:flex">
               <p className="text-meta-5">{person.email}</p>
             </div>
