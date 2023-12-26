@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Breadcrumb from '../../components/Breadcrumb';
+// import Breadcrumb from '../../components/Breadcrumb';
 import { Link } from 'react-router-dom';
 import { HexColorPicker } from 'react-colorful';
 
@@ -59,7 +59,7 @@ const FormLayout2 = () => {
 
   return (
     <>
-      <Breadcrumb pageName="Add Settings" />
+      {/* <Breadcrumb pageName="Add Settings" /> */}
 
       <div className="flex flex-col gap-9">
         <div className="rounded-xl border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">

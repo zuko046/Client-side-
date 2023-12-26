@@ -1,10 +1,10 @@
-import Breadcrumb from '../components/Breadcrumb';
+// import Breadcrumb from '../components/Breadcrumb';
 import TableTwo from '../components/EntityList';
 
 const Tables = () => {
   return (
     <>
-      <Breadcrumb pageName="Entity" />
+      {/* <Breadcrumb pageName="Entity" /> */}
 
       <div className="flex flex-col gap-10">
         <TableTwo />
