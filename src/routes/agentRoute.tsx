@@ -29,7 +29,7 @@ function AgentRoute() {
             {agentRouteSet.map(({ path, component: Component }, index) => (
               <Route key={index} path={path} element={<Component />} />
             ))}
-            
+
           </Route>
         </Routes>
       </Suspense>
