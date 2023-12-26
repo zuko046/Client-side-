@@ -50,9 +50,12 @@ const SignIn = () => {
 
       } else if (user.userRole === 2) {
         localStorage.setItem('agent', token);
-
         // Redirect to the agent dashboard
+        console.log("working");
+
         navigate('/');
+        console.log("working");
+        
       } else {
         // Handle unknown role or show an error message
         console.error('Unknown user role:', user.userRole);

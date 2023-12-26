@@ -1,19 +1,13 @@
 import { lazy } from 'react';
-
 const EntityForm = lazy(() => import('../pages/Form/EntityForm'));
 
 const coreRoutes = [
   {
-    path: '/token',
-    title: 'Token list',
+    path: '/addtoken',
+    title: 'addToken ',
     component: EntityForm,
   },
-  // {
-  //   path: '/addtoken',
-  //   title: 'Add Token',
-  //   component: EntityForm,
-  // },
 ];
 
-const agentRoutes = [...coreRoutes];
-export default agentRoutes;
+const agentRouteSet = [...coreRoutes];
+export default agentRouteSet;

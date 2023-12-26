@@ -6,14 +6,14 @@ import { Outlet } from 'react-router-dom';
 const DefaultLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const admin = localStorage.getItem('admin');
-  console.log(admin);
+  console.log(admin, 'layout ');
 
   return (
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
       <div className="flex h-screen overflow-hidden">
         {admin ? (
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        ) : (null)}
+        ) : null}
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           <main>
