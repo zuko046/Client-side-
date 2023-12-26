@@ -15,13 +15,6 @@ function App() {
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
-  useEffect(() => {
-    const admin = localStorage.getItem('admin');
-    if (!admin) {
-      navigate('/login');
-    }
-  }, [navigate]);
-
   return loading ? (
     <Loader />
   ) : (

@@ -6,7 +6,7 @@ import Loader from '../common/Loader';
 import agentRouteSet from './agent';
 
 const DefaultLayout = lazy(() => import('../layout/DefaultLayout'));
-const ECommerce = lazy(() => import('../pages/Dashboard/ECommerce'));
+const Dashboard = lazy(() => import('../pages/Dashboard/ECommerce'));
 
 function AgentRoute() {
   // const [loading, setLoading] = useState<boolean>(true);
@@ -24,11 +24,11 @@ function AgentRoute() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<DefaultLayout />}>
-            <Route index element={<ECommerce />} />
-
+            <Route index element={<Dashboard />} />
+{/* 
             {agentRouteSet.map(({ path, component: Component }, index) => (
               <Route key={index} path={path} element={<Component />} />
-            ))}
+            ))} */}
 
           </Route>
         </Routes>
