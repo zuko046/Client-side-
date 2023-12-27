@@ -1,17 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const FormLayout = () => {
+const EditAgentProfile = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
+
   const [user, setUser] = useState({
+    _id:'',
     name: '',
     userName: '',
     email: '',
     contactNumber: '',
-    password: '',
-    confirmPassword: '',
   });
+
+  useEffect(() => {
+    const fetchAgentData = async () => {
+      try {
+        const response = await axios.get<any>(
+          `http://localhost:5000/api/admin/agent/${id}`,
+        );
+        console.log('API Response:', response.data);
+        setUser(response.data.agentDetails);
+        console.log(user);
+      } catch (error) {
+        console.error('Error fetching agent data:', error);
+      }
+    };
+
+    fetchAgentData();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,7 +46,7 @@ const FormLayout = () => {
     try {
       // Replace the URL with your actual registration endpoint
       const response = await axios.post(
-        'http://localhost:5000/api/admin/agent-register',
+        'http://localhost:5000/api/admin//edit-agent',
         user,
       );
       console.log(user);
@@ -106,40 +125,12 @@ const FormLayout = () => {
               />
             </div>
 
-            <div className="mb-4.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter password"
-                value={user.password}
-                onChange={handleChange}
-                className="w-2/3 rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-              />
-            </div>
-
-            <div className="mb-5.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Re-type Password
-              </label>
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Re-enter password"
-                value={user.confirmPassword}
-                onChange={handleChange}
-                className="w-2/3 rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-              />
-            </div>
-
             <div className="flex justify-center">
               <button
                 type="submit"
                 className="flex justify-center rounded bg-primary p-3 font-medium text-gray ml-50"
               >
-                Register
+                Submit
               </button>
               <Link
                 to="/admin/userlist"
@@ -155,4 +146,4 @@ const FormLayout = () => {
   );
 };
 
-export default FormLayout;
+export default EditAgentProfile;

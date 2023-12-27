@@ -6,9 +6,15 @@ import { loginUser } from '../../redux/reducer/userSlice';
 
 const SignIn = () => {
   const navigate = useNavigate();
-
-  const agent = localStorage.getItem('agent');
   const admin = localStorage.getItem('admin');
+  const agent = localStorage.getItem('agent');
+  if (admin) {
+    console.log('LOGIN PAGE ADMIN', admin);
+    navigate('/admin');
+  } else if (agent) {
+    console.log('LOGIN PAGE AGENT', agent);
+    navigate('/');
+  }
 
   const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
@@ -51,6 +57,7 @@ const SignIn = () => {
         navigate('/admin');
       } else if (user.userRole === 2) {
         localStorage.setItem('agent', token);
+        localStorage.setItem('agentID', user?._id);
         // Redirect to the agent dashboard
         console.log('working');
 

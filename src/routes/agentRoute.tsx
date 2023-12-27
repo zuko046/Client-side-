@@ -4,9 +4,11 @@ import Loader from '../common/Loader';
 // import routes from './admin';
 // import adminRoutes from './admin';
 import agentRouteSet from './agent';
+import EntityForm from '../pages/Form/EntityForm';
+// import DashboardAgent from '../pages/Agent/AgentDashboard';
 
 const DefaultLayout = lazy(() => import('../layout/DefaultLayout'));
-const Dashboard = lazy(() => import('../pages/Dashboard/ECommerce'));
+const DashboardAgent = lazy(() => import('../pages/Agent/AgentDashboard'));
 
 function AgentRoute() {
   // const [loading, setLoading] = useState<boolean>(true);
@@ -19,12 +21,14 @@ function AgentRoute() {
 
   if (!agent) {
     return <Navigate to="/login" />;
-  } else {
+  } else  {
     return (
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<DefaultLayout />}>
-            <Route index element={<Dashboard />} />
+            <Route index element={<DashboardAgent />} />
+            <Route path='/addtoken' element={<EntityForm />} />
+
             {/* 
             {agentRouteSet.map(({ path, component: Component }, index) => (
               <Route key={index} path={path} element={<Component />} />

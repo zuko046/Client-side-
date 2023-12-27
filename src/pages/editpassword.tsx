@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate , useParams  } from 'react-router-dom';
 
-const FormLayout = () => {
+const EditAgentPassword = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [user, setUser] = useState({
-    name: '',
-    userName: '',
-    email: '',
-    contactNumber: '',
+    _id:id,
+    previousPassword: '',
     password: '',
     confirmPassword: '',
   });
@@ -23,17 +22,18 @@ const FormLayout = () => {
 
   const handleRegistration = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    if (user.password !== user.confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
     try {
-      // Replace the URL with your actual registration endpoint
       const response = await axios.post(
-        'http://localhost:5000/api/admin/agent-register',
+        'http://localhost:5000/api/admin/change-agentpassword',
         user,
       );
       console.log(user);
-
-      console.log('User registered:', response.data);
-      alert('User registered successfully!');
+      console.log('User registered :', response.data);
+      alert('passoword chnage successfully!');
       navigate('/admin/userlist');
     } catch (error) {
       console.error('Error registering user:', error);
@@ -55,52 +55,13 @@ const FormLayout = () => {
           <form onSubmit={handleRegistration} className="p-6.5">
             <div className="mb-4.5">
               <label className="mb-2.5 block text-black dark:text-white">
-                Name
+                Previous Password
               </label>
               <input
-                type="text"
-                name="name"
-                placeholder="Enter your full name"
-                value={user.name}
-                onChange={handleChange}
-                className="w-2/3 rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-              />
-            </div>
-            <div className="mb-4.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                User Name
-              </label>
-              <input
-                type="text"
-                name="userName"
-                placeholder="Enter your user name"
-                value={user.userName}
-                onChange={handleChange}
-                className="w-2/3 rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-              />
-            </div>
-            <div className="mb-4.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email address"
-                value={user.email}
-                onChange={handleChange}
-                className="w-2/3 rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-              />
-            </div>
-            <div className="mb-4.5">
-              <label className="mb-2.5 block text-black dark:text-white">
-                Contact Number
-              </label>
-              <input
-                type="number"
-                name="contactNumber"
-                placeholder="Enter your Contact number"
-                value={user.contactNumber}
+                type="password"
+                name="previousPassword"
+                placeholder="Enter your previous password"
+                value={user.previousPassword}
                 onChange={handleChange}
                 className="w-2/3 rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
@@ -139,7 +100,7 @@ const FormLayout = () => {
                 type="submit"
                 className="flex justify-center rounded bg-primary p-3 font-medium text-gray ml-50"
               >
-                Register
+                Submit
               </button>
               <Link
                 to="/admin/userlist"
@@ -155,4 +116,4 @@ const FormLayout = () => {
   );
 };
 
-export default FormLayout;
+export default EditAgentPassword;
