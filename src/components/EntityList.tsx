@@ -70,9 +70,7 @@ const TableTwo: React.FC = () => {
           <h5 className="hidden text-sm font-medium uppercase xsm:text-base text-center sm:block">
             Phone
           </h5>
-          <h5 className="hidden text-sm font-medium uppercase xsm:text-base text-center sm:block">
-            Edit
-          </h5>
+         
         </div>
 
         {people.map((person) => (

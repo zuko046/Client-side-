@@ -104,7 +104,7 @@ const UserList: React.FC = () => {
               <p className="text-black dark:text-white">{person.userName}</p>
             </div>
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-3">{person.email}</p>
+              <p className="m-2">{person.email}</p>
             </div>
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p className="text-black dark:text-white">
@@ -113,11 +113,9 @@ const UserList: React.FC = () => {
             </div>
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
               <p
-                className={`text-meta-5 ${
-                  person.status ? 'text-green-500' : 'text-red-500'
-                }`}
+              // className={`text- ${  person.status ? 'text-green-500' : 'text-red-500'}`}
+              // className={`${person.status ? 'text-green-500' : 'text-red-500'}`}
               >
-
                 {person.status ? 'Active' : 'Inactive'}
               </p>
             </div>
